@@ -3,213 +3,194 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Happy Day Tanisha!</title>
+<title>🏎️ Happy Race Day Tanisha!</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
   body {
     margin: 0; padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #fce4ec, #e1bee7);
+    font-family: 'Orbitron', sans-serif;
+    background: url('https://i.imgur.com/6gYhE4O.jpeg') repeat-x center/cover;
+    animation: trackMove 5s linear infinite;
     display: flex; justify-content: center; align-items: center;
     height: 100vh;
     overflow: hidden;
-    color: #4a148c;
+    color: white;
   }
+
+  @keyframes trackMove {
+    from { background-position: 0 0; }
+    to { background-position: -200px 0; }
+  }
+
   .container {
-    background: white;
-    padding: 2.5rem 3rem;
+    background: rgba(0,0,0,0.8);
+    padding: 2rem 3rem;
     border-radius: 20px;
-    box-shadow: 0 15px 30px rgba(156, 39, 176, 0.3);
+    border: 3px solid red;
+    box-shadow: 0 15px 30px rgba(255,0,0,0.6);
     max-width: 420px;
     text-align: center;
     position: relative;
   }
+
   h1 {
     font-size: 2.5rem;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
+    color: red;
+    text-shadow: 0 0 10px black;
   }
+
   p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 1.5rem;
     line-height: 1.4;
   }
+
   button {
     cursor: pointer;
-    background: #9c27b0;
+    background: red;
     border: none;
     color: white;
-    padding: 0.75rem 2rem;
+    padding: 0.7rem 2rem;
     font-weight: 700;
     font-size: 1rem;
     border-radius: 30px;
     transition: background 0.3s ease;
-    box-shadow: 0 6px 10px rgba(156,39,176,0.4);
     margin: 0.5rem;
   }
   button:hover {
-    background: #7b1fa2;
-    box-shadow: 0 8px 14px rgba(123,31,162,0.6);
+    background: darkred;
   }
 
-  /* Full-screen overlay */
-  .overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-    z-index: 999;
-    text-align: center;
-  }
-  .overlay.visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .overlay h2 {
-    font-size: 2rem;
-    color: #6a1b9a;
-    margin-bottom: 1rem;
-  }
-  .overlay p {
-    font-size: 1.2rem;
-    color: #4a148c;
-    max-width: 500px;
-    margin: 0 auto 1.5rem;
-  }
-  .confetti-piece {
-    position: fixed;
-    width: 10px;
-    height: 14px;
-    opacity: 0.9;
-    will-change: transform, opacity;
-    pointer-events: none;
-    border-radius: 3px;
-    transform-origin: center;
-    z-index: 1000;
-  }
-  /* Hidden photo initially */
-  #photoContainer {
-    display: none;
-    margin-top: 1rem;
-  }
   #photoContainer img {
     width: 100%;
     max-width: 300px;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border: 3px solid white;
+  }
+
+  /* Hidden wishes message */
+  #messageContainer {
+    display: none;
+    margin-top: 1.5rem;
+    text-align: left;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  /* Moving F1 car */
+  .f1-car {
+    position: absolute;
+    bottom: 10px;
+    left: -200px;
+    width: 150px;
+    animation: carMove 5s linear infinite;
+  }
+  @keyframes carMove {
+    0% { left: -200px; }
+    50% { transform: rotate(-5deg); }
+    100% { left: 110%; }
+  }
+
+  /* Countdown lights */
+  .lights {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .light {
+    width: 25px;
+    height: 25px;
+    margin: 0 5px;
+    background: gray;
+    border-radius: 50%;
+  }
+  .light.on {
+    background: red;
+    box-shadow: 0 0 10px red;
   }
 </style>
 </head>
 <body>
   <div class="container">
-    <h1>Happppppy birthdayyy , Tannnaaaaa! 🎉</h1>
-    <p>Stay always Happppppy keep shining always shining  . <br></p>
-    <button id="revealBtn">meowwww</button>
-    <button id="photoBtn">Ever green we bothhhh ❤️ </button>
+    <div class="lights">
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+    </div>
 
-    <div id="photoContainer">
+    <h1>🏁 Happy Birthday, Tannnaaaaaaaaaa! 🏁</h1>
+    <p>You're the champion of my heart — faster than any F1 car, brighter than any podium finish! 🚦</p>
+    <button id="revealBtn">Start the Race</button>
+    <button id="photoBtn">See uss evergreen ❤️</button>
+
+    <!-- Wishes (hidden until race starts) -->
+    <div id="messageContainer">
+      <p>
+        Happppppy birthdayyy tannnaaaaaaaa.<br>
+        May your dreams come true and your smile grow brighter every day! 🎂✨<br>
+        love you Tannnaaaaa ❤<br>
+        You are my besttt bestest friend, partner, bestt.<br>
+        May God give you all love, all success, and all happiness. 💖<br>
+        bas stay always with meee<br>
+        very happy for you<br>
+        achieve all success in life<br>
+        make proud to ur family<br>
+        many more memories yet to come for us<br>
+        we have a best friendship bond<br>
+        hope to keep it life long<br>
+        many many many love form me to u<br>
+        its ur day<br>
+        enjoyyyy--enjoooyyy<br>
+        mari chocolates baki okayyy<br><br>
+        as alwasy i dont have more words ...<br>
+        BUT MUCH MORRE HAPPY WISHES
+      </p>
+    </div>
+
+    <!-- Photo (hidden until clicked) -->
+    <div id="photoContainer" style="display:none;">
       <img src="myphoto.jpg" alt="Tanisha">
     </div>
   </div>
 
-  <!-- Full-screen Surprise -->
-  <div id="overlay" class="overlay">
-    <h2> Tannaaaaa 💜</h2>
-    <p>Happppppy birthdayyy tannnaaaaaaaa.<br>
-
-       May your dreams come true and your smile grow brighter every day! 🎂✨<br>
-       love you Tannnaaaaa ❤️<br>
-       You are my besttt bestest friend, partner, bestt.<br>
-       May God give you all love, all success, and all happiness. 💖
-       bas stay always with meee
-       very happy for you
-       achieve all success in life 
-       make proud to ur family 
-       many more memories yet to come for us 
-       we have a best friendship bond 
-       hope to keep it life long 
-       many many many love form me to u 
-       its ur day 
-       enjoyyyy--enjoooyyy
-       mari chocolates baki okayyy
-
-       as alwasy i dont have more words ...
-       BUT MUCH MORRE HAPPY WISHES
-    </p>
-    <button onclick="closeOverlay()">Back</button>
-  </div>
+  <img src="https://i.imgur.com/FU5P0yM.png" class="f1-car">
 
 <script>
+  const lights = document.querySelectorAll('.light');
+  let lightIndex = 0;
+
+  function startCountdown(callback) {
+    lightIndex = 0;
+    lights.forEach(light => light.classList.remove('on'));
+    const interval = setInterval(() => {
+      if (lightIndex < lights.length) {
+        lights[lightIndex].classList.add('on');
+        lightIndex++;
+      } else {
+        clearInterval(interval);
+        setTimeout(callback, 500);
+      }
+    }, 700);
+  }
+
   const revealBtn = document.getElementById('revealBtn');
   const photoBtn = document.getElementById('photoBtn');
-  const overlay = document.getElementById('overlay');
   const photoContainer = document.getElementById('photoContainer');
+  const messageContainer = document.getElementById('messageContainer');
 
   revealBtn.addEventListener('click', () => {
-    overlay.classList.add('visible');
-    createConfettiRain();
+    startCountdown(() => {
+      messageContainer.style.display = "block";
+    });
   });
 
   photoBtn.addEventListener('click', () => {
-    // Toggle the photo visibility
-    if (photoContainer.style.display === "none") {
-      photoContainer.style.display = "block";
-    } else {
-      photoContainer.style.display = "none";
-    }
+    photoContainer.style.display = (photoContainer.style.display === "none") ? "block" : "none";
   });
-
-  function closeOverlay() {
-    overlay.classList.remove('visible');
-  }
-
-  function randomRange(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-
-  function createConfettiPiece() {
-    const confetti = document.createElement('div');
-    confetti.classList.add('confetti-piece');
-    confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
-    confetti.style.left = Math.random() * window.innerWidth + 'px';
-    confetti.style.top = '-20px';
-    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-    document.body.appendChild(confetti);
-
-    const duration = randomRange(2000, 3500);
-    const horizontalMovement = randomRange(-100, 100);
-
-    let start = null;
-    function animate(timestamp) {
-      if (!start) start = timestamp;
-      const elapsed = timestamp - start;
-      const progress = Math.min(elapsed / duration, 1);
-
-      confetti.style.top = progress * window.innerHeight + 'px';
-      confetti.style.left = (parseFloat(confetti.style.left) + horizontalMovement * progress) + 'px';
-      confetti.style.opacity = 1 - progress;
-      confetti.style.transform = `rotate(${progress * 360}deg)`;
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      } else {
-        confetti.remove();
-      }
-    }
-    requestAnimationFrame(animate);
-  }
-
-  function createConfettiRain() {
-    for (let i = 0; i < 80; i++) {
-      setTimeout(createConfettiPiece, i * 30);
-    }
-  }
 </script>
 </body>
 </html>
