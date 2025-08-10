@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Day Tanisha!</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fce4ec, #e1bee7);
+      display: flex; justify-content: center; align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      color: #4a148c;
+    }
+    .container {
+      background: white;
+      padding: 2.5rem 3rem;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(156, 39, 176, 0.3);
+      max-width: 420px;
+      text-align: center;
+      position: relative;
+      user-select: none;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.3rem;
+    }
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+    }
+    button {
+      cursor: pointer;
+      background: #9c27b0;
+      border: none;
+      color: white;
+      padding: 0.75rem 2rem;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 30px;
+      transition: background 0.3s ease;
+      box-shadow: 0 6px 10px rgba(156,39,176,0.4);
+    }
+    button:hover {
+      background: #7b1fa2;
+      box-shadow: 0 8px 14px rgba(123,31,162,0.6);
+    }
+    .message {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      color: #6a1b9a;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .message.visible {
+      opacity: 1;
+    }
+    .confetti-piece {
+      position: fixed;
+      width: 10px;
+      height: 14px;
+      background-color: #9c27b0;
+      opacity: 0.9;
+      will-change: transform, opacity;
+      pointer-events: none;
+      border-radius: 3px;
+      transform-origin: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="Special wish for Tanisha">
+    <h1>Happy Day, Tanisha! 🎉</h1>
+    <p>This website is just for you.<br>Click the button below to see your surprise!</p>
+    <button id="revealBtn" aria-live="polite" aria-pressed="false" aria-describedby="message">
+      Reveal Surprise
+    </button>
+    <div id="message" class="message" role="alert" aria-hidden="true">
+      Dear Tanisha,<br />
+      Wishing you a day full of love, laughter and magical moments.<br />
+      May your dreams come true and your smile grow brighter every day! 💜
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById('revealBtn');
+    const message = document.getElementById('message');
+
+    function randomRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function createConfettiPiece() {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti-piece');
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+      confetti.style.left = Math.random() * window.innerWidth + 'px';
+      confetti.style.top = '-20px';
+      confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+      document.body.appendChild(confetti);
+
+      const duration = randomRange(2000, 3500);
+      const horizontalMovement = randomRange(-100, 100);
+
+      let start = null;
+      function animate(timestamp) {
+        if (!start) start = timestamp;
+        const elapsed = timestamp - start;
+
+        // progress 0 to 1
+        const progress = Math.min(elapsed / duration, 1);
+
+        confetti.style.top = progress * window.innerHeight + 'px';
+        confetti.style.left = (parseFloat(confetti.style.left) + horizontalMovement * progress) + 'px';
+        confetti.style.opacity = 1 - progress;
+        confetti.style.transform = `rotate(${progress * 360 + parseFloat(confetti.style.transform.replace('rotate(', '').replace('deg)', ''))}deg)`;
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          confetti.remove();
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+
+    btn.addEventListener('click', () => {
+      if (message.classList.contains('visible')) return; // prevent repeated clicks
+      message.classList.add('visible');
+      message.setAttribute('aria-hidden', 'false');
+      btn.setAttribute('aria-pressed', 'true');
+      btn.textContent = 'Surprise Revealed!';
+
+      // Create confetti
+      for(let i = 0; i < 80; i++) {
+        setTimeout(createConfettiPiece, i * 30);
+      }
+    });
+  </script>
+</body>
+</html>
